@@ -47,4 +47,14 @@ public abstract class GameEntity extends ImageView {
             }
         }
     }
+
+    public static int getNumberOfEntity(String searchedEntity) {
+        int numsOfEntity = 0;
+        for (GameEntity entity : Globals.gameObjects) {
+            if (entity.getGameObjectsName().equals(searchedEntity)) {
+                numsOfEntity++;
+            }
+        }
+        return numsOfEntity;
+    }
 }
