@@ -34,7 +34,7 @@ public class SnakeBody extends GameEntity implements Animatable {
             history.add(new Vec2d(xc, yc));
         }
     }
-    
+
     public GameEntity getBodyParent() { return parent; }
 
     public void step() {
