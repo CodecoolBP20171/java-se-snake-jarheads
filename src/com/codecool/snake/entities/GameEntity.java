@@ -29,4 +29,8 @@ public abstract class GameEntity extends ImageView {
         }
         return false;
     }
+
+    public String getGameObjectsName(){
+       return this.imageProperty().getBean().getClass().getSimpleName();
+    }
 }

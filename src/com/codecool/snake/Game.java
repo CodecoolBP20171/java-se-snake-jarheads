@@ -10,9 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class Game extends Pane {
+    public static SnakeHead shead;
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        shead = new SnakeHead(this, 500, 500);
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
@@ -53,8 +54,15 @@ public class Game extends Pane {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("--- NewGame ---");
+                restartGame();
             }
         });
         getChildren().add(btn);
+    }
+
+    private void restartGame() {
+        Globals.gameLoop.stop();
+        shead.newGame(this,500,500);
+        Globals.gameLoop.start();
     }
 }

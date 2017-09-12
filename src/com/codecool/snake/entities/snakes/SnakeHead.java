@@ -27,6 +27,22 @@ public class SnakeHead extends GameEntity implements Animatable {
         addPart(4);
     }
 
+    public void newGame(Pane pane, int xc, int yc) {
+        health = 100;
+        for (GameEntity entity : Globals.gameObjects) {
+            if (entity.getGameObjectsName().equals("SnakeHead")) {
+                entity.setX(xc);
+                entity.setY(yc);
+                System.out.println(entity.getGameObjectsName() + "Y: " + entity.getY());
+            }
+            if (entity.getGameObjectsName().equals("SnakeBody")) {
+                entity.destroy();
+            }
+        }
+        tail = this;
+        addPart(4);
+    }
+
     public void step() {
         double dir = getRotate();
         if (Globals.leftKeyDown) {
