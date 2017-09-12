@@ -78,6 +78,16 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
     }
 
+    public void removePart(int numParts) {
+        for (int i = 0; i < numParts; i++) {
+            for (int j = Globals.gameObjects.size() - 1; j >= 0; j--) {
+                if (Globals.gameObjects.get(j).getGameObjectsName().equals("SnakeBody")) {
+                    Globals.gameObjects.get(j).destroy();
+                }
+            }
+        }
+    }
+
     public void changeHealth(int diff) {
         health += diff;
     }
