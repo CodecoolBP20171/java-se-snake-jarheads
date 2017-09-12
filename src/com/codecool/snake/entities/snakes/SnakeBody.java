@@ -34,6 +34,8 @@ public class SnakeBody extends GameEntity implements Animatable {
             history.add(new Vec2d(xc, yc));
         }
     }
+    
+    public GameEntity getBodyParent() { return parent; }
 
     public void step() {
         Vec2d pos = history.poll(); // remove the oldest item from the history
