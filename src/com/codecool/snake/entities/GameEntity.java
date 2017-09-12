@@ -29,4 +29,32 @@ public abstract class GameEntity extends ImageView {
         }
         return false;
     }
+
+    public String getGameObjectsName(){
+       return this.imageProperty().getBean().getClass().getSimpleName();
+    }
+
+    public static void clearAllExcept(String... args){
+        for (GameEntity entity : Globals.gameObjects) {
+            boolean argsIn = false;
+            for (String arg : args){
+                if(entity.getGameObjectsName().equals(arg)) {
+                    argsIn = true;
+                }
+            }
+            if (!argsIn) {
+                entity.destroy();
+            }
+        }
+    }
+
+    public static int getNumberOfEntity(String searchedEntity) {
+        int numsOfEntity = 0;
+        for (GameEntity entity : Globals.gameObjects) {
+            if (entity.getGameObjectsName().equals(searchedEntity)) {
+                numsOfEntity++;
+            }
+        }
+        return numsOfEntity;
+    }
 }
