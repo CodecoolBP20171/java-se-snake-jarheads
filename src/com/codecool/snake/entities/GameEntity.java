@@ -33,4 +33,18 @@ public abstract class GameEntity extends ImageView {
     public String getGameObjectsName(){
        return this.imageProperty().getBean().getClass().getSimpleName();
     }
+
+    public static void clearAllExcept(String... args){
+        for (GameEntity entity : Globals.gameObjects) {
+            boolean argsIn = false;
+            for (String arg : args){
+                if(entity.getGameObjectsName().equals(arg)) {
+                    argsIn = true;
+                }
+            }
+            if (!argsIn) {
+                entity.destroy();
+            }
+        }
+    }
 }

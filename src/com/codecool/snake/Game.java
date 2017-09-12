@@ -1,5 +1,6 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -53,15 +54,17 @@ public class Game extends Pane {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("--- NewGame ---");
+                System.out.println("- NewGame -");
                 restartGame();
             }
         });
         getChildren().add(btn);
     }
 
+
     private void restartGame() {
         Globals.gameLoop.stop();
+        GameEntity.clearAllExcept("SnakeHead");
         shead.newGame(this,500,500);
         Globals.gameLoop.start();
     }
