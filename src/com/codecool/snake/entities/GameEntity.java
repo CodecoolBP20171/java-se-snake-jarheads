@@ -23,11 +23,19 @@ public abstract class GameEntity extends ImageView {
     }
 
     protected boolean isOutOfBounds() {
-        if (getX() > Globals.WINDOW_WIDTH || getX() < 0 ||
-            getY() > Globals.WINDOW_HEIGHT || getY() < 0) {
+        if (getX() > Globals.WINDOW_WIDTH - 20 || getX() < 0 ||
+            getY() > Globals.WINDOW_HEIGHT- 20 || getY() < 0) {
             return true;
         }
         return false;
+    }
+
+    protected String isNearOfBounds(int border) {
+        if (getX() > Globals.WINDOW_WIDTH - 20 - border) return "right";
+        if (getX() < border ) return "left";
+        if (getY() > Globals.WINDOW_HEIGHT - 20 - border) return "bottom";
+        if (getY() < border ) return "top";
+        return "";
     }
 
     public String getGameObjectsName(){
