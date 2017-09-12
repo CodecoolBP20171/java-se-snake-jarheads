@@ -65,4 +65,19 @@ public abstract class GameEntity extends ImageView {
         }
         return numsOfEntity;
     }
+
+    public static void clearEntity(String... args){
+        for (GameEntity entity : Globals.gameObjects) {
+            boolean argsIn = false;
+            for (String arg : args){
+                if(entity.getGameObjectsName().equals(arg)) {
+                    argsIn = true;
+                }
+            }
+            if (argsIn) {
+                entity.destroy();
+            }
+        }
+    }
+
 }
