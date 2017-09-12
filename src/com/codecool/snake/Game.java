@@ -21,22 +21,16 @@ public class Game extends Pane {
 
     public Game() {
         shead = new SnakeHead(this, 500, 500);
+        startStateEntities();
+    }
 
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
+    private void startStateEntities() {
+        for (int i = 0; i < 4; i++) {
+            new SimpleEnemy(this);
+            new SimplePowerup(this);
+            new ToxicPowerUp(this);
 
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-
-        new ToxicPowerUp(this);
-        new ToxicPowerUp(this);
-        new ToxicPowerUp(this);
-        new ToxicPowerUp(this);
-
+        }
     }
 
     public void start() {
@@ -77,6 +71,7 @@ public class Game extends Pane {
         this.getChildren().remove(2);
         GameEntity.clearAllExcept("SnakeHead");
         shead.newGame(this,500,500);
+        startStateEntities();
         Globals.gameLoop.start();
     }
 
