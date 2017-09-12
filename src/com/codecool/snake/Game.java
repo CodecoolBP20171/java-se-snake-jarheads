@@ -6,9 +6,14 @@ import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.text.Text;
 
 public class Game extends Pane {
     public static SnakeHead shead;
@@ -61,11 +66,11 @@ public class Game extends Pane {
         getChildren().add(btn);
     }
 
-
     private void restartGame() {
-        Globals.gameLoop.stop();
+        this.getChildren().remove(2);
         GameEntity.clearAllExcept("SnakeHead");
         shead.newGame(this,500,500);
         Globals.gameLoop.start();
     }
+
 }
