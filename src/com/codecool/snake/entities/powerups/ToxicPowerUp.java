@@ -22,7 +22,7 @@ public class ToxicPowerUp extends GameEntity implements Interactable {
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.takePart(3);
+        snakeHead.removePart(3);
         destroy();
     }
 
