@@ -84,6 +84,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void gameOver(Pane pane){
         Text text = new Text(500,500, "GAME OVER \n Your score: " + String.valueOf(GameEntity.getNumberOfEntity("SnakeBody")));
+
         text.setFont(new Font(20));
         text.setWrappingWidth(200);
         pane.getChildren().add(text);
