@@ -6,6 +6,9 @@ import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 
+    private static int iterTime = 0;
+    private static int secTime = 0;
+
     // This gets called every 1/60 seconds
     @Override
     public void handle(long now) {
@@ -15,6 +18,10 @@ public class GameLoop extends AnimationTimer {
                 animObject.step();
             }
         }
+
+        iterTime++;
+        if (iterTime % 60 == 0) {secTime++;}
+
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
 
