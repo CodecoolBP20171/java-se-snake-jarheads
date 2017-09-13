@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.enemies.SimpleEnemy;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
@@ -19,8 +20,12 @@ public class GameLoop extends AnimationTimer {
             }
         }
 
+        if (GameEntity.getNumberOfEnemy() < 4){
+            new SimpleEnemy(Snake.game);
+        }
+
         iterTime++;
-        if (iterTime % 60 == 0) {secTime++;}
+        if (iterTime > 60) {secTime++; iterTime = 0;}
 
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
