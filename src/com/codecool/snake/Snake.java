@@ -15,11 +15,14 @@ public class Snake extends Application {
         Snake.gameStage = gameStage;
     }
 
+    static Game game;
+
+
     @Override
     public void start(Stage primaryStage) {
         setGameStage(primaryStage);
 
-        Game game = new Game();
+        game = new Game();
 
         primaryStage.setTitle("Snake Game");
         primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
