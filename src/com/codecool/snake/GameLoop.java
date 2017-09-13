@@ -3,12 +3,14 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 
     private static int iterTime = 0;
-    private static int secTime = 0;
+    public static int secTime = 0;
 
     // This gets called every 1/60 seconds
     @Override
@@ -20,8 +22,16 @@ public class GameLoop extends AnimationTimer {
             }
         }
 
-        if (GameEntity.getNumberOfEnemy() < 4){
+        if (GameEntity.getNumberOfEnemy() < 5){
             new SimpleEnemy(Snake.game);
+        }
+
+        if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("ToxicPowerUp") < 5) {
+            new ToxicPowerUp(Snake.game);
+        }
+
+        if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("SimplePowerup") < 5) {
+            new SimplePowerup(Snake.game);
         }
 
         iterTime++;
