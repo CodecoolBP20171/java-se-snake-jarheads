@@ -4,6 +4,8 @@ import com.codecool.snake.Globals;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.Random;
+
 // The base class for every game entity.
 public abstract class GameEntity extends ImageView {
 
@@ -99,6 +101,26 @@ public abstract class GameEntity extends ImageView {
             if (argsIn) {
                 entity.destroy();
             }
+        }
+    }
+
+    public boolean isIntersectsOthers(){
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void spawnToFreeLocation(){
+        Random rnd = new Random();
+        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
+        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        while (isIntersectsOthers()) {
+            System.out.println("inside while loop");
+            setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
+            setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
         }
     }
 
