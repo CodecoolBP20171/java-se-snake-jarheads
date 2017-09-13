@@ -1,12 +1,15 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.*;
 import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
+import static com.codecool.snake.Game.shead;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -14,6 +17,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private int bodyNum;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -61,9 +65,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
 
         // check for game over condition
-        if (isOutOfBounds() || health <= 0) {
+        if (isOutOfBounds() || health <= 0 || bodyNum <= 1) {
             System.out.println("Game Over");
+            GameEntity.clearAllExcept("SnakeHead");
             Globals.gameLoop.stop();
+            gameOver(super.pane);
+
         }
     }
 
@@ -72,9 +79,27 @@ public class SnakeHead extends GameEntity implements Animatable {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
         }
+        bodyNum += numParts;
+    }
+
+    public void removePart(int numParts) {
+        for(int i = 0; i < numParts; i ++) {
+            GameEntity parent = ((SnakeBody)tail).getBodyParent();
+            tail.destroy();
+            tail = parent;
+        }
+        bodyNum -= numParts;
     }
 
     public void changeHealth(int diff) {
         health += diff;
+    }
+
+    public void gameOver(Pane pane){
+        Text text = new Text(500,500, "GAME OVER \n Your score: " + String.valueOf(GameEntity.getNumberOfEntity("SnakeBody")));
+
+        text.setFont(new Font(20));
+        text.setWrappingWidth(200);
+        pane.getChildren().add(text);
     }
 }
