@@ -66,6 +66,28 @@ public abstract class GameEntity extends ImageView {
         return numsOfEntity;
     }
 
+    public static int getNumberOfEnemy(){
+        String[] args = {"SimpleEnemy"};
+        return getNumberOfEntitys(args);
+    }
+
+    public static int getNumberOfPowerUp(){
+        String[] args = {"SimplePowerup","ToxicPowerUp"};
+        return getNumberOfEntitys(args);
+    }
+
+    public static int getNumberOfEntitys(String... args) {
+        int numsOfEntity = 0;
+        for (GameEntity entity : Globals.gameObjects) {
+            for (String arg : args){
+                if(entity.getGameObjectsName().equals(arg)) {
+                numsOfEntity++;
+                }
+            }
+        }
+        return numsOfEntity;
+    }
+
     public static void clearEntity(String... args){
         for (GameEntity entity : Globals.gameObjects) {
             boolean argsIn = false;
