@@ -16,9 +16,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
-    private int health;
-    private int bodyNum;
 
+    private double health;
+
+    private int bodyNum;
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -91,8 +92,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         bodyNum -= numParts;
     }
 
+    public double getHealth() {
+        return health;
+    }
+
     public void changeHealth(int diff) {
         health += diff;
+        System.out.println(getHealth()/100);
     }
 
     public void gameOver(Pane pane){

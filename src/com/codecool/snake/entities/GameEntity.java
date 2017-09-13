@@ -118,7 +118,6 @@ public abstract class GameEntity extends ImageView {
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
         while (isIntersectsOthers()) {
-            System.out.println("inside while loop");
             setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
             setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
         }

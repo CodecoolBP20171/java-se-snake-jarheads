@@ -5,19 +5,18 @@ import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.text.Text;
 
 public class Game extends Pane {
     public static SnakeHead shead;
+    public static ProgressBar hpBar = new ProgressBar(1);
 
     public Game() {
         shead = new SnakeHead(this, 500, 500);
@@ -36,6 +35,7 @@ public class Game extends Pane {
     public void start() {
         Scene scene = getScene();
         addButtons();
+        getChildren().add(hpBar);
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -74,5 +74,7 @@ public class Game extends Pane {
         startStateEntities();
         Globals.gameLoop.start();
     }
+
+
 
 }
