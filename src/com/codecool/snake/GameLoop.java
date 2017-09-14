@@ -24,6 +24,8 @@ public class GameLoop extends AnimationTimer {
             }
         }
 
+        Game.hpBar.setProgress(Game.shead.getHealth() / 100);
+
         if (GameEntity.getNumberOfEnemy() < 5){
             new SimpleEnemy(Snake.game);
         }
