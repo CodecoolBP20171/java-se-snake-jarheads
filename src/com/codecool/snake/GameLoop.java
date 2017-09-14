@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.SelfDestructable;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -22,6 +23,10 @@ public class GameLoop extends AnimationTimer {
             if (gameObject instanceof Animatable) {
                 Animatable animObject = (Animatable)gameObject;
                 animObject.step();
+            }
+            if (gameObject instanceof SelfDestructable) {
+                SelfDestructable destructableObject = (SelfDestructable) gameObject;
+                destructableObject.selfDestruct();
             }
         }
 
