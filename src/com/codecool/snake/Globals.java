@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 // class for holding all static stuff
 public class Globals {
@@ -26,6 +27,7 @@ public class Globals {
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
+    public static Random rnd = new Random();
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
