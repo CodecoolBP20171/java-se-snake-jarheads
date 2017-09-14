@@ -2,22 +2,24 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.SnailEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 import javafx.scene.control.Button;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.text.Text;
 
 public class Game extends Pane {
     public static SnakeHead shead;
+    public static ProgressBar hpBar;
 
     public Game() {
         shead = new SnakeHead(this, 500, 500);
@@ -29,13 +31,14 @@ public class Game extends Pane {
             new SimpleEnemy(this);
             new SimplePowerup(this);
             new ToxicPowerUp(this);
+            new SnailEnemy(this);
 
         }
     }
 
     public void start() {
         Scene scene = getScene();
-        addButtons();
+        addHBox();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -53,7 +56,7 @@ public class Game extends Pane {
         Globals.gameLoop.start();
     }
 
-    public void addButtons() {
+    public void addHBox() {
         // Button 1 - ReStart
         Button btn = new Button();
         btn.setText("New Game");
@@ -64,7 +67,14 @@ public class Game extends Pane {
                 restartGame();
             }
         });
-        getChildren().add(btn);
+        // health bar
+        hpBar = new ProgressBar(1);
+        Label label = new Label("Healt: ");
+        final HBox hb = new HBox();
+        hb.setSpacing(5);
+        hb.setAlignment(Pos.CENTER);
+        hb.getChildren().addAll(btn, label, hpBar);
+        getChildren().add(hb);
     }
 
     private void restartGame() {
@@ -74,5 +84,4 @@ public class Game extends Pane {
         startStateEntities();
         Globals.gameLoop.start();
     }
-
 }

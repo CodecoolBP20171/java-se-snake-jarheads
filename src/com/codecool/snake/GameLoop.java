@@ -5,12 +5,14 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 
     private static int iterTime = 0;
     public static int secTime = 0;
+    public static int bugEnemySpeedLimitInSec = 0;
 
     // This gets called every 1/60 seconds
     @Override
@@ -22,6 +24,8 @@ public class GameLoop extends AnimationTimer {
             }
         }
 
+        Game.hpBar.setProgress(Game.shead.getHealth() / 100);
+
         if (GameEntity.getNumberOfEnemy() < 5){
             new SimpleEnemy(Snake.game);
         }
@@ -32,6 +36,14 @@ public class GameLoop extends AnimationTimer {
 
         if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("SimplePowerup") < 5) {
             new SimplePowerup(Snake.game);
+        }
+
+        if (secTime < bugEnemySpeedLimitInSec) {
+            if (Game.shead.getSpeed() > 0.5) {
+                Game.shead.setSpeed(Game.shead.getSpeed() - 0.01);
+                }
+        } else {
+            Game.shead.setSpeed(2);
         }
 
         iterTime++;

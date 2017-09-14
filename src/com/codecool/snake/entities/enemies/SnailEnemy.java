@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.enemies;
 
+import com.codecool.snake.GameLoop;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -10,14 +11,12 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import java.util.Random;
 
-// a simple enemy TODO make better ones.
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
-
+public class SnailEnemy extends GameEntity implements Animatable, Interactable {
     private Point2D heading;
     private static final int damage = 10;
-    private int speed = 1;
+    private double speed = 0.1;
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
@@ -25,12 +24,12 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
         this.speed = speed;
     }
 
-    public SimpleEnemy(Pane pane) {
+    public SnailEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.simpleEnemy);
+        setImage(Globals.snailEnemy);
         pane.getChildren().add(this);
-        speed = 1;
+        speed = 0.3;
         spawnToFreeLocation();
         Random rnd = new Random();
         double direction = rnd.nextDouble() * 360;
@@ -41,8 +40,9 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
     @Override
     public void step() {
 
-        if (isNearOfBounds(10) != "") {
-            Random rnd = new Random();
+        Random rnd = new Random();
+        if (isNearOfBounds(10) != "" || rnd.nextInt(100) > 97 ) {
+            rnd = new Random();
             double direction = rnd.nextDouble() * 90;
 
             switch (isNearOfBounds(10)){
@@ -61,7 +61,7 @@ public class SimpleEnemy extends GameEntity implements Animatable, Interactable 
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
+        GameLoop.bugEnemySpeedLimitInSec = 5 + GameLoop.secTime;
         destroy();
     }
 
