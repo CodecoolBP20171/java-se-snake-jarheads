@@ -21,6 +21,7 @@ public class Globals {
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image powerupToxic = new Image("powerup_toxic.png");
     public static Image powerupHealing = new Image ("healing_powerup.png");
+    public static Image imperialStarDestroyer = new Image("Imperial-Star-Destroyer.png");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -29,6 +30,7 @@ public class Globals {
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+    public static GameEntity snake;
 
     static {
         gameObjects = new LinkedList<>();
