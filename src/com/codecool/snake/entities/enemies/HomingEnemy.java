@@ -15,19 +15,18 @@ public class HomingEnemy extends GameEntity implements Animatable, Interactable 
 
     private Point2D heading;
     private static final int damage = 15;
+    private double speed;
 
-    public SimpleEnemy(Pane pane) {
+    public HomingEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.simpleEnemy);
+        setImage(Globals.imperialStarDestroyer);
         pane.getChildren().add(this);
-        int speed = 1;
+        speed = 1;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        double direction = rnd.nextDouble() * 360;
-        setRotate(direction);
+        int direction = 0;
         heading = Utils.directionToVector(direction, speed);
     }
 
@@ -36,6 +35,9 @@ public class HomingEnemy extends GameEntity implements Animatable, Interactable 
         if (isOutOfBounds()) {
             destroy();
         }
+        double dir = Utils.getDirectionBetweenTwo(this, Globals.snake);
+        setRotate(dir);
+        heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
     }
@@ -50,6 +52,4 @@ public class HomingEnemy extends GameEntity implements Animatable, Interactable 
     public String getMessage() {
         return damage + " damage";
     }
-
-
 }
