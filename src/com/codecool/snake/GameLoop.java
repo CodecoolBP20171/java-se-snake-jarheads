@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.SelfDestructable;
+import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -32,29 +33,8 @@ public class GameLoop extends AnimationTimer {
 
         Game.hpBar.setProgress(Game.shead.getHealth() / 100);
 
-        if (GameEntity.getNumberOfEnemy() < 5){
-            new SimpleEnemy(Snake.game);
-        }
-
-        if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("ToxicPowerUp") < 5) {
-            new ToxicPowerUp(Snake.game);
-        }
-
-        if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("SimplePowerup") < 5) {
-            new SimplePowerup(Snake.game);
-        }
-
-        if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("HealingPowerup") < 5) {
-            new HealingPowerup(Snake.game);
-        }
-
-        if (secTime < bugEnemySpeedLimitInSec) {
-            if (Game.shead.getSpeed() > 0.5) {
-                Game.shead.setSpeed(Game.shead.getSpeed() - 0.01);
-                }
-        } else {
-            Game.shead.setSpeed(2);
-        }
+        spawnEnemies();
+        spawnPowerups();
 
         iterTime++;
         if (iterTime > 60) {secTime++; iterTime = 0;}
@@ -64,5 +44,39 @@ public class GameLoop extends AnimationTimer {
 
         Globals.gameObjects.removeAll(Globals.oldGameObjects);
         Globals.oldGameObjects.clear();
+    }
+
+    private void spawnEnemies(){
+        if (GameEntity.getNumberOfEnemy() < 6){
+            new SimpleEnemy(Snake.game);
+        }
+
+        if (secTime < bugEnemySpeedLimitInSec) {
+            if (Game.shead.getSpeed() > 0.5) {
+                Game.shead.setSpeed(Game.shead.getSpeed() - 0.01);
+            }
+        } else {
+            Game.shead.setSpeed(2);
+        }
+        if (GameEntity.getNumberOfEntity("HomingEnemy") < 2) {
+            new HomingEnemy(Snake.game);
+        }
+
+    }
+
+    private void spawnPowerups(){
+        if(secTime % 5 == 0){
+            if (GameEntity.getNumberOfEntitys("SimplePowerup") < 5) {
+                new SimplePowerup(Snake.game);
+            }
+            if (GameEntity.getNumberOfEntitys("ToxicPowerUp") < 5) {
+                new ToxicPowerUp(Snake.game);
+            }
+            if (GameEntity.getNumberOfEntitys("HealingPowerup") < 5) {
+                new HealingPowerup(Snake.game);
+            }
+
+        }
+
     }
 }
