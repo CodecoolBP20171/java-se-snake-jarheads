@@ -72,6 +72,7 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
 
     @Override
     public void apply(SnakeHead player) {
+        player.changeHealth(-damage);
         GameLoop.bugEnemySpeedLimitInSec = 5 + GameLoop.secTime;
         destroy();
     }
