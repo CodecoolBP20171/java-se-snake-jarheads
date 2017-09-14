@@ -7,7 +7,9 @@ import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import javafx.scene.control.Button;
@@ -16,7 +18,7 @@ import javafx.event.EventHandler;
 
 public class Game extends Pane {
     public static SnakeHead shead;
-    public static ProgressBar hpBar = new ProgressBar(1);
+    public static ProgressBar hpBar;
 
     public Game() {
         shead = new SnakeHead(this, 500, 500);
@@ -34,8 +36,7 @@ public class Game extends Pane {
 
     public void start() {
         Scene scene = getScene();
-        addButtons();
-        getChildren().add(hpBar);
+        addHBox();
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -53,7 +54,7 @@ public class Game extends Pane {
         Globals.gameLoop.start();
     }
 
-    public void addButtons() {
+    public void addHBox() {
         // Button 1 - ReStart
         Button btn = new Button();
         btn.setText("New Game");
@@ -64,7 +65,14 @@ public class Game extends Pane {
                 restartGame();
             }
         });
-        getChildren().add(btn);
+        // health bar
+        hpBar = new ProgressBar(1);
+        Label label = new Label("Healt: ");
+        final HBox hb = new HBox();
+        hb.setSpacing(5);
+        hb.setAlignment(Pos.CENTER);
+        hb.getChildren().addAll(btn, label, hpBar);
+        getChildren().add(hb);
     }
 
     private void restartGame() {
@@ -74,7 +82,4 @@ public class Game extends Pane {
         startStateEntities();
         Globals.gameLoop.start();
     }
-
-
-
 }
