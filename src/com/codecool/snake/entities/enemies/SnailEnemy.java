@@ -67,6 +67,6 @@ public class SnailEnemy extends GameEntity implements Animatable, Interactable {
 
     @Override
     public String getMessage() {
-        return "10 damage";
+        return "Slowed down";
     }
 }

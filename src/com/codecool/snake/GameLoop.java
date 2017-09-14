@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.HealingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -36,6 +37,10 @@ public class GameLoop extends AnimationTimer {
 
         if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("SimplePowerup") < 5) {
             new SimplePowerup(Snake.game);
+        }
+
+        if (secTime % 5 == 0 && GameEntity.getNumberOfEntitys("HealingPowerup") < 5) {
+            new HealingPowerup(Snake.game);
         }
 
         if (secTime < bugEnemySpeedLimitInSec) {

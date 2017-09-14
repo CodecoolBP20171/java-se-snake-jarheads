@@ -10,26 +10,29 @@ import javafx.scene.layout.Pane;
 
 import java.util.Random;
 
-public class ToxicPowerUp extends GameEntity implements Interactable, Animatable {
+public class HealingPowerup extends GameEntity implements Interactable, Animatable{
 
     private int creationTime = GameLoop.secTime;
 
-    public ToxicPowerUp(Pane pane) {
+    public HealingPowerup(Pane pane) {
         super(pane);
-        setImage(Globals.powerupToxic);
+        setImage(Globals.powerupHealing);
         pane.getChildren().add(this);
-
         spawnToFreeLocation();
     }
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.removePart(2);
+        if (snakeHead.getHealth() <100){
+            snakeHead.changeHealth(10);
+        }
         destroy();
     }
 
     @Override
-    public String getMessage() { return "Lost from your tail :'("; }
+    public String getMessage() {
+        return "10 Health";
+    }
 
     @Override
     public void step() {

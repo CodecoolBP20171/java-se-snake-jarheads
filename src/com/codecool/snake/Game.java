@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.enemies.SnailEnemy;
+import com.codecool.snake.entities.powerups.HealingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -32,6 +33,7 @@ public class Game extends Pane {
             new SimplePowerup(this);
             new ToxicPowerUp(this);
             new SnailEnemy(this);
+            new HealingPowerup(this);
 
         }
     }
@@ -70,6 +72,8 @@ public class Game extends Pane {
         // health bar
         hpBar = new ProgressBar(1);
         Label label = new Label("Healt: ");
+
+        // common box
         final HBox hb = new HBox();
         hb.setSpacing(5);
         hb.setAlignment(Pos.CENTER);
