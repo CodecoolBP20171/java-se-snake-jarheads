@@ -21,7 +21,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private boolean readyToFire;
     private double health;
 
-    private int bodyNum;
+    private int bodyNum = 0;
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -73,7 +73,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
 
         // check for game over condition
-        if (isOutOfBounds() || health <= 0 || bodyNum <= 1) {
+        if (isOutOfBounds() || health <= 0 || bodyNum < 1) {
             System.out.println("Game Over");
             GameEntity.clearAllExcept("SnakeHead");
             Globals.gameLoop.stop();
