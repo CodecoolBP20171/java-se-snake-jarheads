@@ -23,6 +23,7 @@ public class Globals {
     public static Image powerupToxic = new Image("powerup_toxic.png");
     public static Image powerupHealing = new Image ("healing_powerup.png");
     public static Image beamOfDeath = new Image("beamOfDeath.gif");
+    public static Image gun = new Image("gun1.png");
     public static Image imperialStarDestroyer = new Image("Imperial-Star-Destroyer.png");
     //.. put here the other images you want to use
 

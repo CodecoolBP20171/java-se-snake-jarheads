@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.weapons;
 
+import com.codecool.snake.GameLoop;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
@@ -8,11 +9,10 @@ import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SelfDestructable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
-import javafx.scene.transform.Rotate;
 
-public class BeamOfDeath extends GameEntity implements Animatable {
+public class BeamOfDeath extends GameEntity implements Animatable, SelfDestructable {
 
-    double direction;
+    int creationTime ;
     GameEntity sHead;
 
 
@@ -20,10 +20,11 @@ public class BeamOfDeath extends GameEntity implements Animatable {
         super(pane);
         pane.getChildren().add(this);
         sHead = Globals.snake;
+        creationTime = GameLoop.iterTime;
         setImage(Globals.beamOfDeath);
         setX(sHead.getX());
         setY(sHead.getY());
-        //setRotate(sHead.getRotate() - 90);
+        setRotate(sHead.getRotate() - 90);
     }
 
     @Override
@@ -40,6 +41,13 @@ public class BeamOfDeath extends GameEntity implements Animatable {
 
                 }
             }
+        }
+    }
+
+    @Override
+    public void selfDestruct() {
+        if(GameLoop.iterTime - creationTime > 150) {
+            destroy();
         }
     }
 }

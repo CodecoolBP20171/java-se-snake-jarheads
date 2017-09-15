@@ -73,7 +73,7 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(damage);
+        player.changeHealth(-damage);
         destroy();
     }
 
@@ -84,7 +84,7 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
 
     @Override
     public String getMessage() {
-        return "10 damage";
+        return damage + " damage";
     }
 
 

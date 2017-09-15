@@ -5,6 +5,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.SelfDestructable;
 import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.enemies.SupplyEnemy;
 import com.codecool.snake.entities.powerups.HealingPowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
@@ -13,7 +14,7 @@ import javafx.animation.AnimationTimer;
 
 public class GameLoop extends AnimationTimer {
 
-    private static int iterTime = 0;
+    public static int iterTime = 0;
     public static int secTime = 0;
     public static int bugEnemySpeedLimitInSec = 0;
 
@@ -37,7 +38,7 @@ public class GameLoop extends AnimationTimer {
         spawnPowerups();
 
         iterTime++;
-        if (iterTime > 60) {secTime++; iterTime = 0;}
+        if (iterTime % 60 == 0) {secTime++;}
 
         Globals.gameObjects.addAll(Globals.newGameObjects);
         Globals.newGameObjects.clear();
@@ -59,7 +60,11 @@ public class GameLoop extends AnimationTimer {
             Game.shead.setSpeed(2);
         }
         if (GameEntity.getNumberOfEntity("HomingEnemy") < 2) {
-            new HomingEnemy(Snake.game);
+            new HomingEnemy(Snake.game );
+        }
+
+        if(secTime % 5 == 0 && GameEntity.getNumberOfEntity("SupplyEnemy") == 0){
+            new SupplyEnemy(Snake.game);
         }
 
     }
