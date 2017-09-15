@@ -16,7 +16,7 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
 
     protected Point2D heading;
     protected int damage;
-    protected int speed;
+    protected double speed;
 
     public Enemy(Pane pane) {
         super(pane);
@@ -36,11 +36,11 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
         this.damage = damage;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
@@ -74,7 +74,6 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
     @Override
     public void apply(SnakeHead player) {
         player.changeHealth(damage);
-        GameLoop.bugEnemySpeedLimitInSec = 5 + GameLoop.secTime;
         destroy();
     }
 

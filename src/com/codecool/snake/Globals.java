@@ -28,6 +28,7 @@ public class Globals {
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
+    public static boolean dKeyDown;
     public static Random rnd = new Random();
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.

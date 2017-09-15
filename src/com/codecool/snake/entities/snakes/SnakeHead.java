@@ -4,6 +4,7 @@ import com.codecool.snake.*;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.weapons.BeamOfDeath;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -17,6 +18,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
 
+    private boolean readyToFire;
     private double health;
 
     private int bodyNum;
@@ -25,6 +27,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setX(xc);
         setY(yc);
         health = 100;
+        readyToFire = true;
         tail = this;
         Globals.snake = this;
         setImage(Globals.snakeHead);
@@ -63,6 +66,9 @@ public class SnakeHead extends GameEntity implements Animatable {
                     interactable.apply(this);
                     System.out.println(interactable.getMessage());
                 }
+            }
+            if (readyToFire && Globals.dKeyDown) {
+                fire();
             }
         }
 
@@ -109,11 +115,24 @@ public class SnakeHead extends GameEntity implements Animatable {
         this.speed = speed;
     }
 
+    public boolean isReadyToFire() {
+        return readyToFire;
+    }
+
+    public void setReadyToFire(boolean readyToFire) {
+        this.readyToFire = readyToFire;
+    }
+
     public void gameOver(Pane pane){
         Text text = new Text(500,500, "GAME OVER \n Your score: " + String.valueOf(GameEntity.getNumberOfEntity("SnakeBody")));
 
         text.setFont(new Font(20));
         text.setWrappingWidth(200);
         pane.getChildren().add(text);
+    }
+
+    public void fire() {
+        new BeamOfDeath(pane);
+        readyToFire = false;
     }
 }

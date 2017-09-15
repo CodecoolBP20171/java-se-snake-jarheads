@@ -30,7 +30,6 @@ public class Game extends Pane {
     }
 
     private void startStateEntities() {
-        new BeamOfDeath(this);
         for (int i = 0; i < 4; i++) {
             new HomingEnemy(this);
             new SimplePowerup(this);
@@ -48,6 +47,7 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case D: Globals.dKeyDown = true; break;
             }
         });
 
@@ -55,6 +55,7 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
+                case D: Globals.dKeyDown = false; break;
             }
         });
         Globals.gameLoop = new GameLoop();
