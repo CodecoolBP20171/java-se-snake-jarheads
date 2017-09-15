@@ -7,6 +7,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.weapons.BeamOfDeath;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 import java.util.Random;
@@ -62,6 +63,11 @@ public class SnailEnemy extends GameEntity implements Animatable, Interactable {
     @Override
     public void apply(SnakeHead player) {
         GameLoop.bugEnemySpeedLimitInSec = 5 + GameLoop.secTime;
+        destroy();
+    }
+
+    @Override
+    public void apply(BeamOfDeath beamOfDeath) {
         destroy();
     }
 

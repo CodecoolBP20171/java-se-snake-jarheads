@@ -7,6 +7,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.weapons.BeamOfDeath;
 import javafx.scene.layout.Pane;
 
 import javafx.geometry.Point2D;
@@ -72,8 +73,13 @@ public abstract class Enemy extends GameEntity implements Interactable, Animatab
 
     @Override
     public void apply(SnakeHead player) {
-        player.changeHealth(-damage);
+        player.changeHealth(damage);
         GameLoop.bugEnemySpeedLimitInSec = 5 + GameLoop.secTime;
+        destroy();
+    }
+
+    @Override
+    public void apply(BeamOfDeath beamOfDeath) {
         destroy();
     }
 

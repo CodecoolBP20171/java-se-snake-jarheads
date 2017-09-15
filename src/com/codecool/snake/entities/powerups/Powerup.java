@@ -6,6 +6,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.SelfDestructable;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.weapons.BeamOfDeath;
 import javafx.scene.layout.Pane;
 
 
@@ -21,6 +22,11 @@ public abstract class Powerup extends GameEntity implements Interactable, SelfDe
 
     @Override
     public void apply(SnakeHead snakeHead) {
+        destroy();
+    }
+
+    @Override
+    public void apply(BeamOfDeath beamOfDeath) {
         destroy();
     }
 

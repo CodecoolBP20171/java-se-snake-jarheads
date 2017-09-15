@@ -8,6 +8,7 @@ import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.powerups.ToxicPowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import com.codecool.snake.entities.weapons.BeamOfDeath;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -29,6 +30,7 @@ public class Game extends Pane {
     }
 
     private void startStateEntities() {
+        new BeamOfDeath(this);
         for (int i = 0; i < 4; i++) {
             new HomingEnemy(this);
             new SimplePowerup(this);
